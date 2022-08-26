@@ -14,8 +14,6 @@ You will also develop some familiarity with importing data and the use of extern
 
 What do I need? A modern laptop, a strong motivation to learn, and sufficient English proficiency to use the Julia documentation and the course material.
 
-When? The course will run through out September 2022 from the 1st of September each day 16:00 – 18:00.
-
 If you are interested in joining the Julia community at UALG please contact me Karl Magnus Petersson at: kmpetersson@ualg.pt
 
 
