@@ -19,7 +19,7 @@ When? The course will run through out September 2022 from the 1st of September e
 If you are interested in joining the Julia community at UALG please contact me Karl Magnus Petersson at: kmpetersson@ualg.pt
 
 
-JULIA COURSE INFORMATION
+JULIA COURSE INFORMATION SEPTEMBER 2022
 
 Lectures: Everyday September 01 – 30. 
 
