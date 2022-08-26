@@ -1,5 +1,5 @@
 #  "Code examples for Chapter 01 -- The Way of the Program"
-#   C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
+
 #---
 
 begin   # First program
@@ -38,7 +38,7 @@ typeof(1_000_000)
 
 #---
 
-"Exercise 1-2"
+# Exercise 1-2
 
 sec = 42 * 60 + 42
 miles_per_kilometer = 1 / 1.61
