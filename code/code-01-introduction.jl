@@ -1,8 +1,10 @@
 #  "Code examples for Chapter 01 -- The Way of the Program"
-
+#   C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
+#   cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
 #---
 
-begin   # First program
+
+begin
 
     println()
     println("Hello, World!")
@@ -52,7 +54,10 @@ pace_minutes = pace ÷ 60
 pace_seconds = pace - pace_minutes * 60
 
 min, sec = divrem(pace, 60)
+
 println("time = $min minutes and $sec seconds")
+
+
 
 min = Int(min)
 sec = Int(round(sec))

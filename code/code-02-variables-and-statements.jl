@@ -1,5 +1,6 @@
-#  "Code examples for Chapter 02 – Variables, Expressions and Statements"
-
+#  Code examples for Chapter 02 – Variables, Expressions and Statements
+#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
+#  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
 #---
 
 # Exercise 2-2
@@ -44,6 +45,9 @@ hour = runtime_sec ÷ 3600
 minute = (runtime_sec - hour*3600) ÷ 60
 second = runtime_sec - hour*3600 - minute*60
 
-home = [hour, minute, second]
+home = [hour; minute; second]
 
+home1 = [hour minute second]
+
+home2 = [hour, minute, second]
 #==============================================================================#
