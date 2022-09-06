@@ -1,0 +1,3 @@
+Having df as a Julia dataframe, writing R""" saveRDS($df, file="path/to/my.RDS")   should then work. If not, check with R""" getwd() """  if your R session has somehow ended up with a different working directory.
+
+You should be able to convert that column to a union with missing by doing df.column= convert.( Union{Missing,Int}, df.column )
