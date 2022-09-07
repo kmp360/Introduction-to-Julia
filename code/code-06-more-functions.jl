@@ -2,7 +2,8 @@
 #  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
 #  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
 #---
-"Exercise 6-1"
+
+# "Exercise 6-1"
 
 function comp(x, y)
     if x > y
@@ -18,6 +19,7 @@ comp(2, 3)
 
 
 #---
+
 begin
 
 	function distance(x₁, y₁, x₂, y₂)
@@ -37,6 +39,7 @@ begin
 end
 
 #---
+
 function isdivisible(x, y)
     x % y == 0
 end
@@ -58,7 +61,8 @@ end
 
 
 #---
-"Exercise 6-3"
+
+# "Exercise 6-3"
 
     function isbetween(x, y, z)
         return x ≤ y ≤ z
@@ -67,6 +71,7 @@ end
     isbetween(1, 15, 10)
 
 #---
+
 let
     function fact(n)
         if n == 0
@@ -80,6 +85,7 @@ let
 end
 
 #---
+
 let
     function fib(n)
         if n == 0
@@ -95,6 +101,7 @@ let
 end
 
 #---
+
 let
     function fact(n)
         if !(n isa Int64)			# guardian
@@ -110,7 +117,9 @@ let
 
     fact(1.5)
 end
+
 #---
+
 let
     function fact(n)
         space = " "^(4 * n)
@@ -128,8 +137,10 @@ let
 
     fact(4)
 end
+
 #---
-"Exercise 6-6"
+
+# "Exercise 6-6"
 
 function frst(word)
     first = firstindex(word)
@@ -186,7 +197,8 @@ end
 ispalindrome("abccba")
 
 #---
-"Exercise 6-7"
+
+# "Exercise 6-7"
 
 # development and testing version
 function ispower_preliminary(a, b, flag=false)
@@ -231,7 +243,8 @@ end
 ispower(16, 2)
 
 #---
-"Exercise 6-8"
+
+# "Exercise 6-8"
 
 """
 One way to find the GCD of two numbers is based on the observation that
