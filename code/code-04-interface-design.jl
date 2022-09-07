@@ -1,5 +1,6 @@
 #  Chapter 04 – Interface Design
-
+#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
+#  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
 #---
 
 using Pkg

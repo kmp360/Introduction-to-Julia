@@ -1,5 +1,6 @@
-"Code examples for Chapter 07 -- Iteration"
-
+# "Code examples for Chapter 07 -- Iteration"
+#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
+#  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
 #---
 function countdown(n)
     while n > 0

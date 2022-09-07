@@ -1,5 +1,6 @@
-"Code examples for Chapter 06 -- More on Functions"
-
+# "Code examples for Chapter 06 -- More on Functions"
+#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
+#  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
 #---
 "Exercise 6-1"
 
@@ -57,15 +58,13 @@ end
 
 
 #---
-"Exercise 6-2"
+"Exercise 6-3"
 
-let
     function isbetween(x, y, z)
         return x ≤ y ≤ z
     end
 
     isbetween(1, 15, 10)
-end
 
 #---
 let
