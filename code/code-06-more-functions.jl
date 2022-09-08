@@ -184,6 +184,7 @@ ispalindrome_preliminary("abccba")
 
 # final version
 function ispalindrome(word::String, flag=true)
+    word = lowercase(word)
     if length(word) <= 1
         return flag
     elseif !(frst(word) == lst(word))
@@ -194,7 +195,7 @@ function ispalindrome(word::String, flag=true)
     return flag
 end
 
-ispalindrome("abccba")
+ispalindrome("AbCCBA")
 
 #---
 
