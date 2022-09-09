@@ -2,6 +2,7 @@
 #  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
 #  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
 #---
+
 function countdown(n)
     while n > 0
         print(n, " ")
@@ -11,6 +12,7 @@ function countdown(n)
 end
 
 #---
+
 function seq(n)
     while n != 1
         println(n)
@@ -23,6 +25,7 @@ function seq(n)
 end
 
 #---
+
 while true
     print("> ")
     line = readline()
@@ -35,6 +38,7 @@ end
 println("Done!")
 
 #---
+
 for i = 1:10
     if i % 3 == 0
         continue
@@ -43,6 +47,7 @@ for i = 1:10
 end
 
 #---
+
 let
     a = 2
     x = 5
@@ -70,7 +75,8 @@ let
 end
 
 #---
-"Exercise 7-2"
+
+# "Exercise 7-2"
 
 
 Pkg.add("Printf")
@@ -119,7 +125,8 @@ end
 printtable()
 
 #---
-"Exercise 7-3"
+
+# "Exercise 7-3"
 
 function evalloop()
     expr = ""
@@ -139,10 +146,11 @@ end
 evalloop()
 
 #---
-"Exercise 7-4"
+
+# "Exercise 7-4"
 
 function estimatepi()
-    ϵ = 1e-15
+    ϵ = 1e-17
     α = 2*sqrt(2)/9801
     sum = 0
     term = 1
@@ -152,10 +160,10 @@ function estimatepi()
         factor1 = (1103+26390k) / 396^(4k)
         factor2 = factorial(4k) / factorial(k)^4
         term = factor1 * factor2
-        sum = sum + α*term
+        sum = sum + term
         k += 1
     end
-    return 1/sum
+    return 1/(α*sum)
 end
 
 estimatepi()
