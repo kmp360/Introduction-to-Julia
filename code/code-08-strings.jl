@@ -1,5 +1,6 @@
-"Code examples for Chapter 8 -- Strings"
-
+# "Code examples for Chapter 8 -- Strings"
+#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
+#  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
 #---
 
 using Unicode
@@ -14,6 +15,7 @@ while index <= sizeof(fruits)
 end
 
 #---
+
 function stringTraversal(str)
     index = firstindex(str)
     while index <= sizeof(str)
@@ -84,6 +86,7 @@ end
 find("abracadabra", 's')
 
 #---
+
 function count(word, character)
 	counter = 0
 	for letter in word
@@ -97,6 +100,7 @@ end
 count("abracadabra banana apa", 'a')
 
 #---
+
 firstind = findfirst('a', "abracadabra banana apa")
 
 fin = findfirst("a", "abracadabra banana apa")
@@ -106,11 +110,13 @@ typeof(fin)
 findnext("ana", "banana", 3)
 
 #---
+
 'a' ∈ "banana"
 
 'c' in "banana"
 
 #---
+
 function inboth(word1, word2)
     for letter in word1
         if letter ∈ word2
@@ -122,6 +128,7 @@ end
 inboth("apples", "oranges")
 
 #---
+
 function word_comparison(word)
 	if word < "banana"
 		println("Your word, $word, comes before banana.")
@@ -135,6 +142,7 @@ end
 word_comparison("bananA")
 
 #---
+
 function isreverse(word1, word2)
     if length(word1) != length(word2)
         return false
@@ -155,7 +163,8 @@ end
 isreverse("banana", "ananab")
 
 #---
-"Exercise 8-9"
+
+# "Exercise 8-9"
 
 function ispalindrome(str)
 	return str[end:-1:1] == str
@@ -225,7 +234,8 @@ end
 anylowercase5("APa")
 
 #---
-"Exercise 8-11"
+
+# "Exercise 8-11"
 
 function rotatedword(word::String, offset::Int64)
     offset = abs(offset) % 26
