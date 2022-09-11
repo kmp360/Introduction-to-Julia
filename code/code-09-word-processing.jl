@@ -1,14 +1,16 @@
-"Code examples for Chapter 9 -- Word Processing"
+# "Code examples for Chapter 9 -- Word Processing"
+#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
+#  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
 
-filename = "E:\\aaa-Julia-course-2022\\lectures\\words.txt"
+filename = "E:\\aaa-Julia-course-2022\\lectures-1.8\\words.txt"
 
 #---
-begin
     
-    fin = open(filename)
-    readline(fin)
-    close(fin)
-end
+fin = open(filename)
+readline(fin)
+close(fin)
+
+#---
 
 begin
     fin = open(filename)
@@ -21,50 +23,75 @@ begin
 end
 
 #---
-"Exercise 9-1"
+
+# "Exercise 9-1"
 
 function longWords(fin, len=20)
-	for line in eachline(fin)
-		if sizeof(line) > len
-		    println(line)
+	for str in eachline(fin)
+
+        str_no_wspace = filter(chr -> !isspace(chr), str)
+
+		if sizeof(str_no_wspace) > len
+		    println(str)
 		end
 	end
 end
 
 
-# filename = "E:\\Julia\\a-Pluto-NoteBooks\\ThinkJulia-notebooks\\words.txt"
+# filename = "E:\\aaa-Julia-course-2022\\lectures-1.8\\words.txt"
 fileIn = open(filename)
-
 longWords(fileIn, 15)
-
 close(fileIn)
 
 #---
-"Exercise 9-2"
+
+# "Exercise 9-2"
 
 function hasno_e(word)
-    for letter in word
-        if letter == 'e'
-            return false
-        end
-    end
-    return true
+    
+    return !('e' in word)
+
 end
 
+#hasno_e("abecd")
+
+function no_e(fin)
+    cnt = 0
+    cnttot = 0
+
+	for str in eachline(fin)
+        cnttot += 1
+		if hasno_e(str)
+            cnt += 1
+		    println(str)
+		end
+	end
+    return cnt/cnttot
+end
+
+filename = "E:\\aaa-Julia-course-2022\\lectures-1.8\\words.txt"
+
+begin
+    fileIn = open(filename)
+    percentage = no_e(fileIn)
+    close(fileIn)
+end
+
+percentage
+
 #---
-"Exercise 9-3"
+
+# "Exercise 9-3"
 
 function avoids(word, forbidden)
     for letter in word
-        if letter ∈ forbidden
-            return false
-        end
+        return !(letter ∈ forbidden)
     end
-    return true
 end
 
 #---
-"Exercise 9-4"
+
+# "Exercise 9-4"
 
 function usesonly(word, available)
     for letter in word
@@ -72,11 +99,17 @@ function usesonly(word, available)
             return false
         end
     end
-    true
+
+    return true
 end
 
+available = "acefhlo"
+word = "alfdlfa"
+usesonly(word, available)
+
 #---
-"Exercise 9-5"
+
+# "Exercise 9-5"
 
 function usesall(word, required)
     for letter in required
@@ -84,13 +117,15 @@ function usesall(word, required)
             return false
         end
     end
-    true
+
+    return true
 end
 
 #---
-"Exercise 9-6"
 
-function isabecedarian(word)
+# "Exercise 9-6"
+
+function isabecedarian_1(word)
     i = firstindex(word)
     previous = word[i]
     j = nextind(word, i)
@@ -103,7 +138,7 @@ function isabecedarian(word)
     true
 end
 
-function isabecedarian(word)
+function isabecedarian_2(word)
     if length(word) <= 1
         return true
     end
@@ -112,10 +147,10 @@ function isabecedarian(word)
     if word[i] > word[j]
         return false
     end
-    isabecedarian(word[j:end])
+    isabecedarian_2(word[j:end])
 end
 
-function isabecedarian(word)
+function isabecedarian_3(word)
     i = firstindex(word)
     j = nextind(word, 1)
     while j <= sizeof(word)
@@ -125,10 +160,12 @@ function isabecedarian(word)
         i = j
         j = nextind(word, i)
     end
-    true
+   return  true
 end
 
-function ispalindrome(word)
+#---
+
+function ispalindrome_2(word)   # this code does not cover all cases
     i = firstindex(word)
     j = lastindex(word)
     while i < j
@@ -141,8 +178,12 @@ function ispalindrome(word)
     return true
 end
 
-function ispalindrome(word)
-    isreverse(word, word)
+function ispalindrome_1(word)
+    lowercase(word) == lowercase(reverse(word))
 end
+
+word = "abctCBA"
+ispalindrome_1(word)
+ispalindrome_2(word)
 
 #=============================================================================#
