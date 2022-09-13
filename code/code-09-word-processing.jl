@@ -38,9 +38,9 @@ function longWords(fin, len=20)
 end
 
 
-# filename = "E:\\aaa-Julia-course-2022\\lectures-1.8\\words.txt"
+filename = "E:\\aaa-Julia-course-2022\\lectures-1.8\\words.txt"
 fileIn = open(filename)
-longWords(fileIn, 15)
+longWords(fileIn, 13)
 close(fileIn)
 
 #---
