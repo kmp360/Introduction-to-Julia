@@ -220,8 +220,9 @@ issort([1 3 2])
 issort(['b' 'a'])
 issort(['a' 'b'])
 
-issort([2 3; 
-1 2])
+issort([2 3 4; 
+1 2 5;
+4 5 6])
 #---
 
 # "Exercise 10-6"
@@ -248,7 +249,7 @@ end
 
 word1 = "abb🍌dcc"
 word2 = "cbcbda🍌"
-isanagram(word1, word2)
+isanagram(123, word2)
 
 set = union(word1, word2)
 
@@ -271,6 +272,11 @@ hasduplicates([1 2 3])
 #---
 
 # "Exercise 10-8"
+using Unicode
+
+vector = ['🍌', '🍓', '🍐']
+
+rand(vector, 10)
 
 function relfreq(n = 1e6)
     sum = 0
@@ -325,9 +331,7 @@ end
 
 function inbisect(array, word, flag = false)
     len = length(array) ÷ 2
-    if len < 1
-        return flag = false
-    elseif len == 1
+    if len <= 1
         #@show (word in array)
         return flag = (word in array)
     elseif word > array[len]
@@ -338,28 +342,40 @@ function inbisect(array, word, flag = false)
     return flag
 end
 
-array = createArray()
-inbisect(array, "aardvark")
+function linsearch(array, word)
+    return (word in array)
+end
 
-#@time inbisect(array, "aardvark")
+function linsearch2(array, word)
+    return !(intersect(array, word) == [])
+end
+
+array = createArray()
+#array = array[1:100]
+
+word = "aadvark"
+@time inbisect(array, word)
+@time linsearch(array, word)
+@time linsearch2(array, word)
 
 #---
 
 # "Exercise 10-11"
 
 function reversepairs()
+    #array = createArray()[1:10000]
     array = createArray()
     pairarray = []
     for word in array
         reverseword = reverse(word)
         if inbisect(array, reverseword)
+        #if linsearch(array, reverseword)
+        #if linsearch2(array, reverseword)
             push!(pairarray, [word, reverseword])
         end
     end
     return pairarray
 end
-
-pairs = reversepairs()
 
 @time pairs = reversepairs();
 
