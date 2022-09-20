@@ -1,10 +1,12 @@
-"Code examples for Chapter 11 -- Dictionaries"
-
+# "Code examples for Chapter 11 -- Dictionaries"
+#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
+#  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
 #---
+
 function histogram(s)
     d = Dict()
     for c in s
-        if c ∉ keys(d)
+        if !(c in keys(d))
             d[c] = 1
         else
             d[c] += 1
@@ -13,20 +15,24 @@ function histogram(s)
     return d
 end
 
-#---
-"Exercise 11-1"
+str = "brontosaurus"
+histogram(str)
 
-function histogram2(s)
-    d = Dict()
-    for c in s
-        d[c] = get(d, c, 0) + 1
-    end
+#---
+
+# "Exercise 11-1"
+
+function histogram2(s::String)::Dict{Char, Int64}
+    d = Dict{Char, Int64}()
+    for c in s, d[c] = get(d, c, 0) + 1 end
     return d
 end
 
-h = histogram2("brontosaurus")
+str = "brontosaurus"
+h = histogram2(str)
 
 #---
+
 function printhist(h)
     for c in keys(h)
         println(c, " ", h[c])
@@ -36,6 +42,7 @@ end
 printhist(h)
 
 #---
+
 function printhist2(h)
     for c in sort(collect(keys(h)))
         println(c, " ", h[c])
@@ -44,7 +51,9 @@ end
 
 printhist2(h)
 
+
 #---
+
 function reverselookup(d, v)
     for k in keys(d)
         if d[k] == v
@@ -54,13 +63,14 @@ function reverselookup(d, v)
     error("LookupError - value v is not in the dictionary d")
 end
 
-h = histogram2("parrot")
+h = histogram("parrot")
 reverselookup(h, 2)
 reverselookup(h, 3)
 
 findall(x -> x == 2, h)
 
 #---
+
 function invertdict(d)
     inverse = Dict()
     for key in keys(d)
@@ -74,10 +84,11 @@ function invertdict(d)
     inverse
 end
 
-hist = histogram("parrot")
+hist = histogram("brontosaurus")
 inverse = invertdict(hist)
 
 #---
+
 known = Dict(0 => 0, 1 => 1)
 
 function fibonacci(n)
@@ -93,47 +104,52 @@ fibonacci(1000)
 fibonacci(10000)  # is negative, what happend?
 
 #---
-known = Dict(0 => 0, 1 => 1);
-println(known)
+
+been_called = false
+
+function example2()
+    global been_called
+    been_called = true
+end
+
+example2(); been_called
+
+#---
 
 function example4()
     known[2] = 1
-    println("\nrunning example4\n")
+    println("running example4")
 end
 
-example4()
-
-println(known)
+known = Dict(0 => 0, 1 => 1); println(known)
+example4(); println(known)
 
 #---
-known2 = Dict(0 => 0, 1 => 1);
-println(known2)
 
 function example5()
     global known2 = Dict()
-    println("\nrunning example5\n")
+    println("running example5")
 end
 
-example5()
-
-println(known2)
+known2 = Dict(0 => 0, 1 => 1); println(known2)
+example5(); println(known2)
 
 #---
+
 const known3 = Dict(0 => 0, 1 => 1)
 println(known3)
 
 function example6()
-    known3[2] = 1
+    known3[3] = 1
 end
 
-example6()
-
-println(known3)
+example6(); println(known3)
 
 #---
+
 function createDict()
     fileIn = open(
-        "E:\\aaa-Julia-course-2022\\lectures\\words.txt")
+        "E:\\aaa-Julia-course-2022\\lectures-1.8\\words.txt")
     wrdDct = Dict{String, Int}()
     M = 0; W = ""
     for word in eachline(fileIn)
@@ -170,19 +186,16 @@ function interlock()
     return [intrlock_1, intrlock_2]
 end
 
+#==
 using BenchmarkTools
 
-@btime begin
+@btime intrloc = interlock();
 
-    intrloc = interlock()
+==#
 
-end
+@time intrloc = interlock();
 
-#---
-
-intrloc = interlock()
-intrloc_1 = intrloc[1]
-
+intrloc_1 = intrloc[1];
 for k = 1:length(intrloc_1)
     println(
         "$(intrloc_1[k][1]) + $(intrloc_1[k][2]) : $(intrloc_1[k][3])"
@@ -190,9 +203,9 @@ for k = 1:length(intrloc_1)
 
 end
 
-
 #---
-"Exercise 11-3"
+
+# "Exercise 11-3"
 
 function invertdict(d::Dict)
     inverse = Dict()
@@ -208,7 +221,8 @@ d = Dict("a"=>1, "b"=>2, "c"=>3, 'e'=>3)
 invd = invertdict(d)
 
 #---
-"Exercise 11-5"
+
+# "Exercise 11-5"
 
 function createArray()
     fileIn = open(
@@ -225,18 +239,25 @@ end
 
 wrdArray = createArray()
 
+
+
 function new_hasduplicates(array)
     d = Dict()
-    for k = 1:length(array)
-        d[array[k]] = get!(d, array[k], 0) + 1
+    for k in array
+        d[k] = get!(d, k, 0) + 1
     end
-
     return Bool(1 in (values(d) .> 1))
 end
 
-using BenchmarkTools
-@btime begin
-    new_hasduplicates(wrdArray)
+function new_hasduplicates2(array)
+    d = Dict()
+    for k in array
+        d[k] = get!(d, k, 0) + 1
+        if d[k] > 1
+            return true
+        end
+    end
+    return false
 end
 
 # from Exercise 10-7
@@ -244,12 +265,15 @@ function hasduplicates(array)
     return !(sizeof(union(array)) == sizeof(array))
 end
 
-@btime begin
-    hasduplicates(wrdArray)
-end
+using BenchmarkTools
+@btime new_hasduplicates(wrdArray)
+@btime new_hasduplicates2(wrdArray)
+@btime hasduplicates(wrdArray)
+
 
 #---
-"Exercise 11-6"
+
+# "Exercise 11-6"
 
 # from "Exercise 8-11"
 function rotatedword(word::String, offset::Int64)
@@ -292,6 +316,5 @@ function rotated_pairs(words::Array{String, 1})
     return rotatedPairs
 end
 
-@btime begin
-    rotatedPairs = rotated_pairs(wrdArray)
-end
+@time rotatedPairs = rotated_pairs(wrdArray);
+rotatedPairs
