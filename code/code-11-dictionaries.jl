@@ -116,12 +116,15 @@ example2(); been_called
 
 #---
 
+const known = Dict(0 => 0, 1 => 1)
+
 function example4()
     known[2] = 1
     println("running example4")
 end
 
-known = Dict(0 => 0, 1 => 1); println(known)
+#known = Dict(0 => 0, 1 => 1); 
+println(known)
 example4(); println(known)
 
 #---
@@ -193,9 +196,9 @@ using BenchmarkTools
 
 ==#
 
-@time intrloc = interlock();
+@time int = interlock();
 
-intrloc_1 = intrloc[1];
+intrloc_1 = int[1];
 for k = 1:length(intrloc_1)
     println(
         "$(intrloc_1[k][1]) + $(intrloc_1[k][2]) : $(intrloc_1[k][3])"

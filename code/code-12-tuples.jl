@@ -1,11 +1,14 @@
-"Code examples for Chapter 12  -- Tuples"
-
+# "Code examples for Chapter 12  -- Tuples"
+#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
+#  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
 #---
+
 a = 1;
 b = 2;
 a, b = b, a
 
 #---
+
 function minMax(t)
     minimum(t), maximum(t)
 end
@@ -16,30 +19,25 @@ minMax(tpl)
 extrema(tpl)
 
 #---
+
 function printall(args...)
     println(args)
 end
 
-printall(1, 2.0, '3')
+printall(1, 2.0, '3', 4)
 
-#---#---
+#---
+
 sum(1, 2, 3)
 sum( (1, 2, 3) )
 sum(k for k = 1:3)
 
-#---
-function sumall(arg...)
-    sum = 0
-    for num in arg
-        sum = sum + num
-    end
-    return sum
-end
+(k for k = 1:3)
 
-sumall(1, 2, 3)
-sumall( (1, 2, 3) )
+[k for k = 1:2:10]
 
 #---
+
 s = "abc"
 t = [1, 2, 3]
 
@@ -52,6 +50,7 @@ for pair in zip(s, t)
 end
 
 #---
+
 t = [('a', 1), ('b', 2), ('c', 3)]
 
 for (letter, number) in t     # note the automatic splitting by (letter, number)
@@ -59,6 +58,7 @@ for (letter, number) in t     # note the automatic splitting by (letter, number)
 end
 
 #---
+
 z = collect(zip("Anne", "Elk"))
 
 for c in z
@@ -75,6 +75,7 @@ for (a, b) in z
 end
 
 #---
+
 function hasmatch(t1, t2)
     for (x, y) in zip(t1, t2)
         if x == y
@@ -85,22 +86,20 @@ function hasmatch(t1, t2)
 end
 
 #---
+
 for (index, element) in enumerate("abc")
     println()
     println(index, " ", element)
 end
 
 #---
-d = Dict('a' => 1, 'b' => 2, 'c' => 3)
+
+d = Dict('a' => 3, 'b' => 2, 'c' => 1)
 
 for (key, value) in d
     println()
     println(value, " ", key)
 end
-
-vect = collect(d)
-vect[2]
-
 
 ks = sort(collect(keys(d)))
 for key in ks
@@ -108,13 +107,30 @@ for key in ks
 end
 
 #---
+
+d = Dict('a' => 3, 'b' => 2, 'c' => 1)
+
+ks = collect(keys(d))
+vs = collect(values(d))
+pind = sortperm(ks)
+[ks[pind] vs[pind]]
+
+pind2 = sortperm(vs)
+[ks[pind2] vs[pind2]]
+
+
+
+#---
+
 t = [('a', 1), ('c', 3), ('b', 2)]
 d = Dict(t)
 
 #---
+
 d = Dict(zip("abc", 1:3))
 
 #---
+
 "Exercise 12-1"
 
 function sumall(arg...)
@@ -126,15 +142,16 @@ function sumall(arg...)
 end
 
 sumall(1, 2, 3)
+sumall(1, 2, 3, 4)
 sumall((1, 2, 3))
 sumall((1, 2, 3)...)
 
 #---
-"Exercise 12-2"
+# "Exercise 12-2"
 
 function lexiconDict()
-    fpth = "E:\\aaa-Julia-course-2022\\lectures\\words.txt"
-    fileIn = open(fpth)
+    fullpth = "E:\\aaa-Julia-course-2022\\lectures-1.8\\words.txt"
+    fileIn = open(fullpth)
 
     lexiconDict = Dict{String, Array{Char,1}}()
     for word in eachline(fileIn)
@@ -172,15 +189,15 @@ wordDict = lexiconDict()
 LF = letter_freqDict(wordDict)
 mostfrequent("brontosaurus", LF)
 
-#==============================================================================#
-"Exercise 12-3"
+#---
+# "Exercise 12-3"
 
 using Primes
 
 function slurp()
     """slurp in word list"""
     fhandle = open(
-        "E:\\aaa-Julia-course-2022\\lectures\\words.txt",
+        "E:\\aaa-Julia-course-2022\\lectures-1.8\\words.txt",
         "r",
     )
     words = String[]
@@ -201,7 +218,7 @@ sortedLet = sort(collect(letterFreq), by = x -> x[2], rev = true)
 
 using BenchmarkTools
 
-#@timev begin
+#@time begin
 #@benchmark begin
 
 function codeLetters()
@@ -273,7 +290,7 @@ printAnagrams(ana, 20);
 # end # end of timing
 
 #---
-"Exercise 12-4"
+# "Exercise 12-4"
 
 function anagramCodes(ana)
     """ create an array of word codes arrays """
