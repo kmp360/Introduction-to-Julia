@@ -5,7 +5,7 @@
 
 a = 1;
 b = 2;
-a, b = b, a
+a, b = b, a     # value swap
 
 #---
 
@@ -108,17 +108,39 @@ end
 
 #---
 
-d = Dict('a' => 3, 'b' => 2, 'c' => 1)
+str = "acb"
+nar = [3, 2, 1]
+
+d = Dict(zip(str, nar))
 
 ks = collect(keys(d))
 vs = collect(values(d))
+
 pind = sortperm(ks)
 [ks[pind] vs[pind]]
 
 pind2 = sortperm(vs)
 [ks[pind2] vs[pind2]]
 
+# alternatively
+str = "acb"
+nar = [3, 2, 1]
 
+m1 = sort(collect(zip(str, nar)), by = x -> x[1])
+
+N = length(m1)
+M1 = Array{Any,2}(undef,N,2)
+for r = 1:N, c = 1:2
+    M1[r,c] = m1[r][c]
+end
+M1
+
+m2 = sort(collect(zip(str, nar)), by = x -> x[2])
+M2 = Array{Any,2}(undef,N,2)
+for r = 1:N, c = 1:2
+    M2[r,c] = m1[r][c]
+end
+M2
 
 #---
 
@@ -131,7 +153,11 @@ d = Dict(zip("abc", 1:3))
 
 #---
 
-"Exercise 12-1"
+# "Exercise 12-1"
+
+function sumall_jose(arg...)
+    return sum(arg)
+end
 
 function sumall(arg...)
     sum = 0
@@ -141,10 +167,12 @@ function sumall(arg...)
     return sum
 end
 
-sumall(1, 2, 3)
-sumall(1, 2, 3, 4)
+sumall(1, 2, 3), sumall_jose(1, 2, 3)
+sumall(1, 2, 3, 4), sumall_jose(1, 2, 3, 4)
 sumall((1, 2, 3))
 sumall((1, 2, 3)...)
+
+sum( (5, 7, 1) )
 
 #---
 # "Exercise 12-2"
