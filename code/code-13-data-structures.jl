@@ -1,7 +1,9 @@
 
-"Code examples for Chapter 13 -- Data Structures"
-
+# "Code examples for Chapter 13 -- Data Structures"
+#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
+#  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
 #---
+
 alpha1 = ['a':'z', 'A':'Z']
 
 alpha2 = ['a':'z' 'A':'Z']
@@ -31,6 +33,7 @@ println()
 println(is_letter("B"))
 
 #---
+
 em2 = let
     url = "https://ia800303.us.archive.org/24/items/EmmaJaneAusten_753/emma_pdf_djvu.txt"
     raw_text = read(download(url), String)
@@ -45,8 +48,10 @@ a = collect(eachmatch(r"[a-zA-Z\s]", em2))
 b =  replace(em2, r"[^a-zA-Z\s]" => "")
 b = replace(b, r"\s+" => " ")
 ==#
+
 #---
-"Exercise 13-1"
+
+# "Exercise 13-1"
 
 begin
 
@@ -129,7 +134,8 @@ begin
 end
 
 #---
-"Exercise 13-2"
+
+# "Exercise 13-2"
 
 begin
     url = "https://ia800303.us.archive.org/24/items/EmmaJaneAusten_753/emma_pdf_djvu.txt"
@@ -237,7 +243,8 @@ begin
 end
 
 #---
-"Exercise 13-3"
+
+# "Exercise 13-3"
 
 begin
 
@@ -270,7 +277,8 @@ begin
 end
 
 #---
-"Exercise 13-4"
+
+# "Exercise 13-4"
 
 begin
     wordlist = Array{String,1}()
@@ -313,6 +321,7 @@ begin
 end
 
 #---
+
 begin
 
     println()
@@ -339,7 +348,8 @@ begin
 end
 
 #---
-"Exercise 13-5"
+
+# "Exercise 13-5"
 
 function choosefromhist(hist::Dict)
     ks = collect(keys(hist))
@@ -490,7 +500,8 @@ function printmostcommon(hist, num = 10)
 end
 
 #---
-"Exercise 13-6"
+
+# "Exercise 13-6"
 
 begin
     worddict = Dict{String,Any}()
@@ -526,7 +537,8 @@ begin
 end
 
 #---
-"Exercise 13-7"
+
+# "Exercise 13-7"
 
 begin
 
@@ -592,14 +604,7 @@ end
 
 
 #---
-"Exercise 13-8"
 
-
-
-
-
-
-#---
 # another intermezzo with extras
 
 using Markdown
@@ -617,14 +622,16 @@ string(rand(alphabet, 400)) |> Quote
 alphabet = ['a':'z'; ' ']
 
 #---
+
 function isinalphabet(character)
-    return character ∈ alphabet
+    return character in alphabet
 end
 
 messy_sentence = "#wow 2020 ¥500 (blingbling!)"
 cleaned_sentence = filter(chr -> isinalphabet(chr), messy_sentence)
 
 #---
+
 using Unicode
 
 """
@@ -639,6 +646,7 @@ french_word = "Égalité!"
 unaccent(french_word)
 
 #---
+
 function clean(text)
     txt = lowercase(unaccent(text))
     return filter(chr -> isinalphabet(chr), txt)
@@ -657,6 +665,7 @@ function letter_frequencies(txt)
 end
 
 #---
+
 sample = """
 Although the word forest is commonly used, there is no universally recognised precise definition, with more than 800 definitions of forest used around the world.[4] Although a forest is usually defined by the presence of trees, under many definitions an area completely lacking trees may still be considered a forest if it grew trees in the past, will grow trees in the future,[9] or was legally designated as a forest regardless of vegetation type.[10][11]
 
@@ -672,6 +681,7 @@ sample_freqs = letter_frequencies(cleaned_sample)
 alphabet[ind]
 
 #---
+
 z = zip(alphabet, sample_freqs)
 dump(z)
 
@@ -683,6 +693,7 @@ unused_letters = let
 end
 
 #---
+
 function transition_counts(cleaned_sample)
     [count(string(a, b), cleaned_sample) for a in alphabet, b in alphabet]
 end
@@ -694,6 +705,7 @@ transition_frequencies = normalize_array ∘ transition_counts
 transition_frequencies(cleaned_sample)
 
 #---
+
 using Compose
 
 function compimg(
@@ -726,6 +738,7 @@ function compimg(
 end
 
 #---
+
 using Colors
 
 function show_pair_frequencies(A)
