@@ -56,6 +56,14 @@ printpoint(blank)
 
 #---
 
+# Exercise 15-1
+
+function distancebetweenpoints(p1, p2) 
+    return sqrt((p1.x - p2.x)^2 + (p1.y - p2.y)^2)
+end
+
+#---
+
 function movepoint!(p::MPoint, dx::Float64, dy::Float64)
     p.x += dx
     p.y += dy
@@ -69,6 +77,8 @@ dump(origin)
 #---
 
 movepoint!(p, 1.0, 2.0)
+
+dump(p)
 
 #---
 
@@ -106,6 +116,20 @@ p1 == p2, p1 === p2
 
 #---
 
+# Exercise 15-2
+
+p1 = Point(3.0, 4.0)
+
+p2 = p1
+
+p2 == p1, p2 === p1
+
+p2 = deepcopy(p1)
+
+p2 == p1, p2 === p1
+
+#---
+
 typeof(p)
 
 p isa Point
@@ -113,3 +137,8 @@ p isa Point
 fieldnames(Point)
 
 isdefined(p, :x), isdefined(p, :z)
+
+#---
+
+# Exercise 15-3
+
