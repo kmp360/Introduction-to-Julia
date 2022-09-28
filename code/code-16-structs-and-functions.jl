@@ -39,27 +39,12 @@ printtime(MyTime(1, 9, 0))
 # Exercise 16-2
 
 function isafter(t1::MyTime, t2::MyTime)
-return (
-    t1.hour > t2.hour ||
-    (t1.hour == t2.hour && t1.minute > t2.minute) ||
-    (t1.hour == t2.hour && t1.minute == t2.minute && t1.second > t2.second)
-    )
+    (t1.hour, t1.minute, t1.minute) > (t2.hour, t2.minute, t2.second)
 end
 
-
-function isafter2(t1::MyTime, t2::MyTime)
-    return (
-    t1.hour > t2.hour ||
-    (t1.hour == t2.hour && 
-    (t1.minute > t2.minute || 
-            (t1.minute == t2.minute && t1.second > t2.second)
-    )))
-end
-
-
-t1 = MyTime(0,0,1)
-t2 = MyTime(0,0,1)
-isafter(t1, t2), isafter2(t1, t2)
+t1 = MyTime(1,1,0)
+t2 = MyTime(0,1,1)
+isafter(t1, t2)
 
 #---
 
