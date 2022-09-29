@@ -3,9 +3,9 @@
 #  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
 #---
 
-(1 + 2) :: Float64
-
 (1 + 2) :: Int64
+
+#(1 + 2) :: Float64
 
 function returnfloat()
     x::Float64 = 100
@@ -23,7 +23,7 @@ function sinc(x::Number)::Float64
 end
 
 sinc(0)
-
+sinc(2/3)
 typeof(sinc)
 
 #---
@@ -105,15 +105,19 @@ printtime(done)
 
 #---
 
-function f(a=1, b=2)    # short-form function definition with defaults
-    a + 2b
+typeof(2//3)
+
+#---
+
+function f(c, a = 1, b = 2)    # short-form function definition with defaults
+    a + 2b + c
 end
 
-f()
+f(1)
 
-f(2)
+f(1,2)
 
-f(2,3)
+f(1,2,3)
 
 #---
 
@@ -135,9 +139,10 @@ struct MyTime2
     minute  :: Int64
     second  :: Int64
     
-    function MyTime2(hour::Int64=0, minute::Int64=0, second::Int64=0)
+    function MyTime2(hour::Int64 = 0, minute::Int64 = 0, second::Int64 = 0)
         @assert(0 ≤ minute < 60, "Minute is not between 0 and 60.")
         @assert(0 ≤ second < 60, "Second is not between 0 and 60.")
+
         new(hour, minute, second)
     end
 end
@@ -159,7 +164,7 @@ MyTime2(hour::Int64)
 MyTime2(hour::Int64, minute::Int64)
 MyTime2(hour::Int64, minute::Int64, second::Int64)
 
-MyTime2(hour, minute, second)
+time = MyTime2(hour, minute, second)
 
 #---
 
@@ -171,6 +176,7 @@ mutable struct MyTime3
     function MyTime3(hour::Int64 = 0, minute::Int64 = 0, second::Int64 = 0)
         @assert(0 ≤ minute < 60, "Minute is between 0 and 60.")
         @assert(0 ≤ second < 60, "Second is between 0 and 60.")
+
         time = new()
         time.hour = hour
         time.minute = minute
@@ -181,24 +187,25 @@ end
 
 #---
 
-function Base.show(io::IO, time::MyTime)
+using Printf
+
+function Base.show(io::IO, time::MyTime2)
     @printf(io, "%02d:%02d:%02d\n", time.hour, time.minute, time.second)
 end
 
 fout = open("output.txt", "w")
-time = MyTime(9, 30, 5)
+time = MyTime2(9, 30, 5)
 show(fout, time)
 
 close(fout)
 
 #---
 
-import Base.+
+show(time)
 
-function +(t1::MyTime2, t2::MyTime2)
-    seconds = timetoint2(t1) + timetoint2(t2)
-    return inttotime2(seconds)
-end
+#---
+
+import Base.+
 
 function timetoint2(time::MyTime2)::Int64
     return time.second + time.minute * 60 + time.hour * 3600
@@ -210,6 +217,13 @@ function inttotime2(seconds::Int64)::MyTime2
     d, h = divrem(h, 24)
     return MyTime2(h, m, s)
 end
+
+
+function +(t1::MyTime2, t2::MyTime2)
+    seconds = timetoint2(t1) + timetoint2(t2)
+    return inttotime2(seconds)
+end
+
 
 start = MyTime2(9, 45)
 duration = MyTime2(1, 35, 0)
@@ -240,6 +254,15 @@ function +(seconds::Int64, time::MyTime2)
 start + 37
 
 37 + start
+
+#---
+
+t1 = MyTime2(1, 7, 2)
+t2 = MyTime2(1, 5, 8)
+t3 = MyTime2(1, 5, 0)
+
+# polymorphic function: works because of the + method just defined
+sum((t1, t2, t3))   
 
 #---
 
