@@ -7,6 +7,14 @@
 
 #(1 + 2) :: Float64
 
+x::Float64 = 100
+x
+typeof(x)
+x = "str"
+x = 3
+x
+typeof(x)
+
 function returnfloat()
     x::Float64 = 100
     return x
@@ -14,6 +22,7 @@ end
 
 y = returnfloat()
 typeof(y)
+
 
 function sinc(x::Number)::Float64
     if x == 0
@@ -109,19 +118,19 @@ typeof(2//3)
 
 #---
 
-function f(c, a = 1, b = 2)    # short-form function definition with defaults
+function f(c; a = 1, b = 2)    # short-form function definition with defaults
     a + 2b + c
 end
 
 f(1)
 
-f(1,2)
+f(1, b = 2)
 
-f(1,2,3)
+f(1, b = 2, a = 3)
 
 #---
 
-hour = 16.0
+hour = 16
 minute = 17
 second = 19
 
@@ -138,6 +147,10 @@ struct MyTime2
     hour    :: Int64
     minute  :: Int64
     second  :: Int64
+
+    function MyTime2(hour = 0, minute = 0, second = 0)
+       new(hour, minute, second)
+    end
     
     function MyTime2(hour::Int64 = 0, minute::Int64 = 0, second::Int64 = 0)
         @assert(0 ≤ minute < 60, "Minute is not between 0 and 60.")
@@ -150,9 +163,9 @@ end
 #==
 The struct MyTime2 has 4 inner constructor methods:
     MyTime2()
-    MyTime(hour::Int64)
-    MyTime(hour::Int64, minute::Int64)
-    MyTime(hour::Int64, minute::Int64, second::Int64)
+    MyTime2(hour::Int64)
+    MyTime2(hour::Int64, minute::Int64)
+    MyTime2(hour::Int64, minute::Int64, second::Int64)
 ==#
 
 hour = 16
@@ -232,20 +245,14 @@ start + duration
 
 #---
 
-function +(time::MyTime2, seconds::Int64)
-    increment2(time, seconds)
-end
-
 function increment2(time::MyTime2, seconds::Int64)::MyTime2
     s = seconds + timetoint2(time)
     return inttotime2(seconds)
 end
 
-
 function +(time::MyTime2, seconds::Int64)
-    return increment2(time, seconds)
+    increment2(time, seconds)
 end
-
 
 function +(seconds::Int64, time::MyTime2)
     return time + seconds
