@@ -16,9 +16,9 @@ You will also develop some familiarity with importing data and the use of extern
 
 What do you need? A modern laptop, a strong motivation to learn, and sufficient English proficiency to use the Julia documentation and the course material.
 
-JULIA COURSE INFORMATION SEPTEMBER 2023
+JULIA COURSE INFORMATION 2023
 
-Lectures: Everyday September 01 – 30. 
+Lectures:  
 
 Preliminary hours: 
 
