@@ -1,6 +1,6 @@
 #  Code examples for Chapter 02 – Variables, Expressions and Statements
-#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
-#  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
+#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.9.3\bin\julia.exe
+#  cd("E:\\aaa-Julia-course-2023\\lectures-1.9")
 #---
 
 # Exercise 2-2
@@ -8,21 +8,24 @@
 n = 17
 println(n)
 
-x = y = 10
+x = y = z = 10
 
 typeof(y)
 
 x = 10.
 typeof(x)
 
+z
 
 y = "string".
+
 y = "string"
-y = "string";
+
+y = "string"
 
 
 z = 5; xz
-5x
+x*z
 
 #---
 
