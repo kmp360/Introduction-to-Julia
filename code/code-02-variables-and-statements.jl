@@ -15,8 +15,6 @@ typeof(y)
 x = 10.
 typeof(x)
 
-z
-
 y = "string".
 
 y = "string"
