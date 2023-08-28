@@ -17,6 +17,8 @@ end
 
 ÷     # ÷ is \div<TAB>
 
+div
+
 #---
 
 typeof(2)
