@@ -1,6 +1,6 @@
 #  Code examples for Chapter 03 – Functions
-#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
-#  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
+#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.9.3\bin\julia.exe
+#  cd("E:\\aaa-Julia-course-2023\\lectures-1.9")
 #---
 
 printlyrics()   # function call
@@ -97,10 +97,10 @@ do_n(print_once, "spam", 5)
 
 #---
 
-f = () -> printspam()               # named anonymous function
+f = () -> printspam()          # named anonymous function
 do_twice(f)
 
-do_twice( () -> printspam() )         # anonymous function passed as an argument
+do_twice( () -> printspam() )  # unnamed anonymous function passed as an argument
 
 #---
 
@@ -169,3 +169,4 @@ function printgrid1()
 end
 
 printgrid1()
+
