@@ -1,6 +1,6 @@
 # "Code examples for Chapter 06 -- More on Functions"
-#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
-#  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
+#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.9.3\bin\julia.exe
+#  cd("E:\\aaa-Julia-course-2023\\lectures-1.9")
 #---
 
 # "Exercise 6-1"
@@ -159,7 +159,7 @@ function middle(word)
 end
 
 # development and testing version
-function ispalindrome_preliminary(word, flag = true)
+function ispalindrome_preliminary(word, flag=true)
 
     println("$(length(word))")
 
@@ -202,46 +202,44 @@ ispalindrome("AbCCBA")
 # "Exercise 6-7"
 
 # development and testing version
-function ispower_preliminary(a, b, flag=false)
+function ispower_prel(a, b)
 
     println("1st $a")
 
     if a == 1
-        flag = true
-        return flag
+        # flag = true
+        return true
 
     elseif a % b > 0
-        println("2nd $a")
-        flag = false
-        return flag
+        println("2nd $(a % b)")
+        # flag = false
+        return false
 
     else
-        println("3rd $a")
-        flag = ispower_prel(a ÷ b, b, flag)
-    end
+        println("3rd $(a ÷ b)")
+        ispower_prel(a ÷ b, b)
 
-    return flag
+    end
 end
 
-ispower_preliminary(1, 2)
+ispower_prel(81, 9)
 
 
 # final version
-function ispower(a, b, flag=false)
+function ispower(a, b)
     if !(typeof(a)==Int64) || a < 1
         println("Input has to be a positive integer.")
-        return flag = nothing
+        return 
     elseif a == 1
-        return flag = true
+        return true
     elseif a % b > 0
-        return flag = false
+        return false
     else
-        flag = ispower(a ÷ b, b, flag)
+        ispower(a ÷ b, b)
     end
-    return flag
 end
 
-ispower(16, 2)
+ispower(16, 3)
 
 #---
 
