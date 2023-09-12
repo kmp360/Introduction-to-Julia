@@ -61,7 +61,6 @@ end
 
 
 #---
-
 # "Exercise 6-3"
 
     function isbetween(x, y, z)
@@ -139,7 +138,6 @@ let
 end
 
 #---
-
 # "Exercise 6-6"
 
 function frst(word)
@@ -159,7 +157,7 @@ function middle(word)
 end
 
 # development and testing version
-function ispalindrome_preliminary(word, flag=true)
+function ispalindrome_preliminary(word, flag=true, cnt=1)
 
     println("$(length(word))")
 
@@ -173,8 +171,9 @@ function ispalindrome_preliminary(word, flag=true)
         return flag
     end
 
-    flag = ispalindrome_preliminary(middle(word), flag)
-    println("2nd $flag")
+    cnt = cnt +1
+    flag = ispalindrome_preliminary(middle(word), flag, cnt)
+    println("$(cnt) $flag")
     return flag
 
 end
@@ -199,6 +198,11 @@ ispalindrome("AbCCBA")
 
 #---
 
+ispalindrome2 = (word::String) -> word == reverse(word)
+
+ispalindrome2("abcCba")
+
+#---
 # "Exercise 6-7"
 
 # development and testing version
@@ -207,12 +211,10 @@ function ispower_prel(a, b)
     println("1st $a")
 
     if a == 1
-        # flag = true
         return true
 
     elseif a % b > 0
         println("2nd $(a % b)")
-        # flag = false
         return false
 
     else
