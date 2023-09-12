@@ -167,7 +167,7 @@ function ispalindrome_preliminary(word, flag=true, cnt=1)
 
     elseif !(frst(word) == lst(word))
         flag = false
-        println("1st $flag")
+        println("$(cnt) $flag")
         return flag
     end
 
@@ -178,29 +178,32 @@ function ispalindrome_preliminary(word, flag=true, cnt=1)
 
 end
 
-ispalindrome_preliminary("abccba")
+ispalindrome_preliminary("abcCba")
 
 
 # final version
-function ispalindrome(word::String, flag=true)
+function ispalindrome(word::String)
     word = lowercase(word)
     if length(word) <= 1
-        return flag
+        return true
     elseif !(frst(word) == lst(word))
-        flag = false
-        return flag
+        return false
+    else
+        ispalindrome(middle(word))
     end
-    flag = ispalindrome(middle(word), flag)
-    return flag
 end
 
-ispalindrome("AbCCBA")
+ispalindrome("AbcCBA")
 
 #---
 
-ispalindrome2 = (word::String) -> word == reverse(word)
+ispalindrome2 = (word::String) -> lowercase(word) == reverse(lowercase(word))
 
 ispalindrome2("abcCba")
+
+#---
+word = "abcCba"
+word[end:-1:1]
 
 #---
 # "Exercise 6-7"
