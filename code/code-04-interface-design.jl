@@ -9,7 +9,6 @@ Pkg.add(url = "https://github.com/BenLauwens/ThinkJulia.jl")
 using ThinkJulia
 
 #---
-
 # Exercise 4-1
 
 🐢 = Turtle()
@@ -31,7 +30,6 @@ end
 end
 
 #---
-
 # Exercise 4-2
 
 function square(t)
@@ -44,7 +42,6 @@ end
 @svg square(🐢)
 
 #---
-
 # Exercise 4-3
 
 function disp(s)
@@ -65,7 +62,6 @@ end
 @svg square2(🐢, 100)
 
 #---
-
 # Exercise 4-5
 
 function polygon(t, n, len)
@@ -79,7 +75,6 @@ end
 @svg polygon(🐢, 5, 50)
 
 #---
-
 # Exercise 4-6
 
 function circle(t, r)
@@ -106,7 +101,6 @@ end
 @svg circle2(🐢, 30)
 
 #---
-
 # Exercise 4-7
 
 function arc(t, r, angle)
@@ -156,7 +150,6 @@ function circle(t, r)
 end
 
 #---
-
 # Exercise 4-8
 
 """
@@ -180,7 +173,6 @@ function arc2(t, r, angle)
 end
 
 #---
-
 # Exercise 4-12
 
 """

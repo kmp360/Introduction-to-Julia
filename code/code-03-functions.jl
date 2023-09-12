@@ -57,7 +57,6 @@ print(result)
 println(result)
 
 #---
-
 # Exercise 3-3
 
 function do_twice(f)
@@ -105,7 +104,6 @@ do_twice(f)
 do_twice( () -> printspam() )  # unnamed anonymous function passed as an argument
 
 #---
-
 # Exercise 3-4
 
 function do_n_1(f, x, n=2)
