@@ -15,6 +15,8 @@ end
 # function call
 printlyrics()
 
+printlyrics
+
 #---
 
 function repeatlyrics()

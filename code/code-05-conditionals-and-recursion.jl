@@ -68,7 +68,7 @@ function TimeOfDay()
     #[hour_of_day, minute_of_day, second_of_day]
     println()
     println("Number of days since the epoch: $number_of_days")
-    println("Time of day: $hour_of_day : $minute_of_day : $second_of_day")
+    println("Time of day: $(hour_of_day + 1) : $minute_of_day : $second_of_day")
 end
 
 TimeOfDay()
