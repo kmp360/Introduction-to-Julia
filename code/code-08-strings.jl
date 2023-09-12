@@ -1,6 +1,6 @@
 # "Code examples for Chapter 8 -- Strings"
-#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
-#  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
+#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.9.3\bin\julia.exe
+#  cd("E:\\aaa-Julia-course-2023\\lectures-1.9")
 #---
 
 using Unicode
@@ -39,7 +39,6 @@ end
 strTraversal(fruits)
 
 #---
-
 # Exercise 8.1
 
 function backward_strTraversal(str)
@@ -52,7 +51,6 @@ end
 backward_strTraversal("banana")
 
 #---
-
 # Exercise 8.2
 
 let
@@ -163,7 +161,6 @@ end
 isreverse("banana", "ananab")
 
 #---
-
 # "Exercise 8-9"
 
 function ispalindrome(str)
@@ -173,7 +170,7 @@ end
 ispalindrome("")
 
 #---
-"Exercise 8-10"
+# Exercise 8-10
 
 function anylowercase1(s)
     for c in s
@@ -234,7 +231,6 @@ end
 anylowercase5("APa")
 
 #---
-
 # "Exercise 8-11"
 
 function rotatedword(word::String, offset::Int64)

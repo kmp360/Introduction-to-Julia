@@ -1,6 +1,6 @@
 # "Code examples for Chapter 07 -- Iteration"
-#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
-#  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
+#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.9.3\bin\julia.exe
+#  cd("E:\\aaa-Julia-course-2023\\lectures-1.9")
 #---
 
 function countdown(n)
@@ -34,8 +34,6 @@ while true
     end
     println(line)
 end
-
-println("Done!")
 
 #---
 
@@ -78,14 +76,15 @@ end
 
 # "Exercise 7-2"
 
-
+using Pkg
 Pkg.add("Printf")
 using Printf
 
 println()
-@printf("%.0f %.1f %f\n", 0.5, 0.025, -0.0078125)
+@printf("%.1f %.2f %f\n", 0.5, 0.025, -0.0078125)
 println()
-s = @sprintf("this is a %s %15.1f", "test", 34.567)
+
+s = @sprintf("this is a %s %10.1f", "test", 34.567)
 println(s)
 
 
@@ -106,8 +105,8 @@ end
  mysqrt(100)
 
 function printheader()
-    println("a\t mysqrt\t\t\tsqrt\t\t\tdiff")
-    println("-\t ------\t\t\t----\t\t\t----")
+    println("a\tmysqrt\t\tsqrt           diff")
+    println("-\t------\t\t----           ----")
 end
 
 
@@ -117,7 +116,7 @@ function printtable()
         msrt = mysqrt(ind)
         srt = sqrt(ind)
         diff = abs(msrt - srt)
-        s = @sprintf("%.1f\t %.15f\t%.15f\t%.10e", ind, msrt, srt, diff);
+        s = @sprintf("%.1f\t%.10f\t%.10f   %.5e", ind, msrt, srt, diff);
         println(s)
     end
 end
@@ -131,14 +130,14 @@ printtable()
 function evalloop()
     expr = ""
     while true
-        println("Enter an expression: ")
+        println("\nEnter an expression: ")
         str = readline()
         if str == "done" || str == "Done"
-            println("Ciao! $expr")
+            println("\nCiao!")
             break
         else
             expr = eval(Meta.parse(str))
-            println(expr)
+            println("\n", str, " = ", expr)
         end
     end
 end

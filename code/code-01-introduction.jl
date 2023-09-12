@@ -52,7 +52,7 @@ sec = 42 * 60 + 42
 miles_per_kilometer = 1 / 1.61
 miles = 10 * miles_per_kilometer
 
-seconds = 37 * 69 + 48
+seconds = 37 * 60 + 48
 speed = miles / seconds
 pace = 1 / speed   # in seconds per mile
 
