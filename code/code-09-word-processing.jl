@@ -30,6 +30,7 @@ function longWords(fin, len=20)
 	for str in eachline(fin)
 
         str_no_wspace = filter(chr -> !isspace(chr), str)
+        #str_no_wspace = strip(str)  # alternative
 
 		if sizeof(str_no_wspace) > len
 		    println(str)
@@ -37,11 +38,12 @@ function longWords(fin, len=20)
 	end
 end
 
-
-filename = "E:\\aaa-Julia-course-2023\\lectures-1.9\\words.txt"
-fileIn = open(filename)
-longWords(fileIn, 13)
-close(fileIn)
+begin
+    filename = "E:\\aaa-Julia-course-2023\\lectures-1.9\\words.txt"
+    fileIn = open(filename)
+    longWords(fileIn, 18)
+    close(fileIn)
+end
 
 #---
 
