@@ -1,8 +1,8 @@
 # "Code examples for Chapter 9 -- Word Processing"
-#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
-#  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
+#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.9.3\bin\julia.exe
+#  cd("E:\\aaa-Julia-course-2023\\lectures-1.9")
 
-filename = "E:\\aaa-Julia-course-2022\\lectures-1.8\\words.txt"
+filename = "E:\\aaa-Julia-course-2023\\lectures-1.9\\words.txt"
 
 #---
     
@@ -38,7 +38,7 @@ function longWords(fin, len=20)
 end
 
 
-filename = "E:\\aaa-Julia-course-2022\\lectures-1.8\\words.txt"
+filename = "E:\\aaa-Julia-course-2023\\lectures-1.9\\words.txt"
 fileIn = open(filename)
 longWords(fileIn, 13)
 close(fileIn)
@@ -69,7 +69,7 @@ function no_e(fin)
     return cnt/cnttot
 end
 
-filename = "E:\\aaa-Julia-course-2022\\lectures-1.8\\words.txt"
+filename = "E:\\aaa-Julia-course-2023\\lectures-1.9\\words.txt"
 
 begin
     fileIn = open(filename)
