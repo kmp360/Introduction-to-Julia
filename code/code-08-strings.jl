@@ -10,23 +10,25 @@ fruits = "🍌 🍎 🍐"
 index = firstindex(fruits)
 while index <= sizeof(fruits)
     letter = fruits[index]
-    println(letter)
-    global index = nextind(fruits, index)
+    println(index)
+    index = nextind(fruits, index)
 end
 
 #---
 
 function stringTraversal(str)
-    index = firstindex(str)
+    @show index = firstindex(str)
     while index <= sizeof(str)
         letter = str[index]
         println(letter)
-        index = nextind(str, index)
+        @show index = nextind(str, index)
     end
 
 end
 
 stringTraversal("banana")
+
+stringTraversal(fruits)
 
 #---
 
@@ -36,15 +38,14 @@ function strTraversal(str)
     end
 end
 
-strTraversal(fruits)
+strTraversal("banana")
 
 #---
 # Exercise 8.1
 
 function backward_strTraversal(str)
-    bstr = reverse(str)
-    for letter in bstr
-        println(letter)
+    for letter in reverse(str)
+        print(letter)
     end
 end
 
@@ -53,8 +54,9 @@ backward_strTraversal("banana")
 #---
 # Exercise 8.2
 
-let
-	prefixes = "JKLMNOPQ"
+begin
+
+    prefixes = "JKLMNOPQ"
     suffix = "ack"
 
     for letter in prefixes
@@ -66,7 +68,6 @@ let
     end
     
 end
-
 #---
 
 function find(word, letter)
@@ -81,7 +82,27 @@ function find(word, letter)
     return -1
 end
 
-find("abracadabra", 's')
+function find(word, letter)
+
+    k = 0
+
+    index = firstindex(word)
+    for c in word
+        k += 1
+        if c == letter
+            return index, k
+        end
+        index = nextind(word, index)
+    end
+
+    return -1, k
+end
+
+
+
+ind, cnt = find("abracadabra", 's')
+
+a = find("abracadabra", 's')
 
 #---
 
@@ -89,7 +110,7 @@ function count(word, character)
 	counter = 0
 	for letter in word
 	    if letter == character
-	        counter = counter + 1
+	        counter += 1
 	    end
 	end
 	return counter
@@ -99,17 +120,19 @@ count("abracadabra banana apa", 'a')
 
 #---
 
-firstind = findfirst('a', "abracadabra banana apa")
+firstind = findfirst('c', "abracadabra banana apa")
 
-fin = findfirst("a", "abracadabra banana apa")
+fin = findfirst("cad", "abracadabra banana apa")
 
 typeof(fin)
 
-findnext("ana", "banana", 3)
+dump(fin)
+
+findnext("ana", "bananaanana", 3)
 
 #---
 
-'a' ∈ "banana"
+'a' ∈ "banana"      # \in<TAB>
 
 'c' in "banana"
 
@@ -164,7 +187,7 @@ isreverse("banana", "ananab")
 # "Exercise 8-9"
 
 function ispalindrome(str)
-	return str[end:-1:1] == str
+	return reverse(str) == str
 end
 
 ispalindrome("")
