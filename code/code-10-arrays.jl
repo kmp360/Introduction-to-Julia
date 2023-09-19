@@ -1,6 +1,6 @@
 # "Code example for Chapter 10 -- Arrays"
-#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
-#  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
+#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.9.3\bin\julia.exe
+#  cd("E:\\aaa-Julia-course-2023\\lectures-1.9")
 #---
 
 let
@@ -296,7 +296,7 @@ relfreq(1000)
 # "Exercise 10-9"
 
 function createArray()
-    filename = "E:\\aaa-Julia-course-2022\\lectures-1.8\\words.txt"
+    filename = "E:\\aaa-Julia-course-2023\\lectures-1.9\\words.txt"
     fileIn = open(filename)
     lexicon = []
     for word in eachline(fileIn)
@@ -308,7 +308,7 @@ end
 
 # not an efficient way of solving the problem
 function createArray2()
-    filename = "E:\\aaa-Julia-course-2022\\lectures-1.8\\words.txt"
+    filename = "E:\\aaa-Julia-course-2023\\lectures-1.9\\words.txt"
     fileIn = open(filename)
     lexicon = []
     for word in eachline(fileIn)

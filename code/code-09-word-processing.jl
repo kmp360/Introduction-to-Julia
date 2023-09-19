@@ -2,6 +2,8 @@
 #  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.9.3\bin\julia.exe
 #  cd("E:\\aaa-Julia-course-2023\\lectures-1.9")
 
+cd(readdir, "E:\\aaa-Julia-course-2023\\lectures-1.9")
+
 filename = "E:\\aaa-Julia-course-2023\\lectures-1.9\\words.txt"
 
 #---
@@ -14,12 +16,14 @@ close(fin)
 
 begin
     fin = open(filename)
-
+    k = 0
     for line in eachline(fin)
-        println(line)
+        #println(line)
+        k+=1
     end
 
     close(fin)
+    return k
 end
 
 #---
@@ -135,7 +139,7 @@ function isabecedarian_1(word)
         if c < previous
             return false
         end
-        previous = c
+        @show previous = c
     end
     true
 end
