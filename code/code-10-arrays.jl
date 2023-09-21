@@ -13,6 +13,13 @@ end
 
 #---
 
+["spam", 2.0, 5, [10, 20]]      # column vector
+
+["spam" 2.0 5 [10, 20]]         # ERROR attempt to construct a row vector with a cloumn vector element
+
+["spam" 2.0 5 [10 20]]          # inner parentheses disregarded
+
+#---
 
 numbers = [42, 123]
 
@@ -146,6 +153,28 @@ append!(t, [x])
 
 #---
 
+M = ones(5, 5)
+M = cumsum(M, dims=1)
+
+for c in 1:5
+    M[:, c] = (c-1)*5 .+ M[:, c]
+end
+
+M
+
+M[1:2:5, 2:2:5]
+
+#--- a simpler alternative
+
+A = zeros(5,5)
+A[:] = 1:25
+
+A
+
+A[:] = 1:2:50
+
+A
+#---
 # "Exercise 10-1"
 
 function nestedsum(array)
@@ -163,7 +192,6 @@ nestedsum([4 5; 6 7])
 nestedsum([[1 2], [3], [4 5; 6 7]])
 
 #---
-
 # "Exercise 10-2"
 
 function cumulsum(array)
@@ -180,8 +208,14 @@ end
 cumulsum([4 5])
 cumulsum([4 5; 6 7])
 
-#---
+#--- a simpler alternative
 
+M = [4 5; 6 7]
+M[:]
+cumsum(M[:])        # Julia built-in
+
+cumsum(M, dims=2)
+#---
 # "Exercise 10-3"
 
 function interior(array)
@@ -194,7 +228,6 @@ interior([6 7])
 interior([4 5 6 7])
 
 #---
-
 # "Exercise 10-4"
 
 function interior!(b)
@@ -207,11 +240,10 @@ interior!(b)
 b
 
 #---
-
 # "Exercise 10-5"
 
 function issort(array)
-    a = sort(array,dims=2)
+    a = sort(array,dims=2,rev=true)
     return a == array
 end
 
@@ -224,8 +256,9 @@ issort([2 3 4;
 1 2 5;
 4 5 6])
 #---
-
 # "Exercise 10-6"
+
+using Unicode
 
 function isanagram(word1::String, word2::String)::Bool
     if length(word1) != length(word2)
@@ -237,41 +270,28 @@ function isanagram(word1::String, word2::String)::Bool
     end
 end
 
-function isanagram(word1::Int64, word2::String)::Bool
-    if length(word1) != length(word2)
-        return false
-    else
-        set1 = join(sort(collect(word1)))
-        set2 = join(sort(collect(word2)))
-        return set1 == set2
-    end
-end
-
 word1 = "abb🍌dcc"
 word2 = "cbcbda🍌"
-isanagram(123, word2)
+isanagram(word1, word2)
+
 
 set = union(word1, word2)
 
-isanagram('c', word2)
-
-length(123)
-
 #---
-
 # "Exercise 10-7"
 
 function hasduplicates(array)
     return !(sizeof(union(array)) == sizeof(array))
 end
 
+array = ['a' 'p' 'a']
 hasduplicates(['a' 'p' 'a'])
 hasduplicates([1 2 1])
 hasduplicates([1 2 3])
 
 #---
-
 # "Exercise 10-8"
+
 using Unicode
 
 vector = ['🍌', '🍓', '🍐']
@@ -292,7 +312,6 @@ relfreq()
 relfreq(1000)
 
 #---
-
 # "Exercise 10-9"
 
 function createArray()
@@ -320,13 +339,11 @@ function createArray2()
 end
 
 
-
 @time lexicon = createArray();
 
 @time lexicon2 = createArray2();  # takes about 2 min to run
 
 #---
-
 # "Exercise 10-10"
 
 function inbisect(array, word, flag = false)
@@ -359,28 +376,26 @@ word = "aadvark"
 @time linsearch2(array, word)
 
 #---
-
 # "Exercise 10-11"
 
 function reversepairs()
-    #array = createArray()[1:10000]
-    array = createArray()
+    array = createArray()[1:10000]
+    #array = createArray()
     pairarray = []
     for word in array
         reverseword = reverse(word)
-        if inbisect(array, reverseword)
+        #if inbisect(array, reverseword)
         #if linsearch(array, reverseword)
-        #if linsearch2(array, reverseword)
+        if linsearch2(array, reverseword)
             push!(pairarray, [word, reverseword])
         end
     end
     return pairarray
 end
 
-@time pairs = reversepairs();
+@time reversepairs();
 
 #---
-
 # "Exercise 10-12"
 
 function interlock()
@@ -411,10 +426,9 @@ intrloc_1
 
 intrloc_2
 
-#==
+#---
 using BenchmarkTools
 
 @btime  intrloc_1, intrloc_2 = interlock();
-==#
 
 #=============================================================================#
