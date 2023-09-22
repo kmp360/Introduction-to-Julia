@@ -1,6 +1,6 @@
 # "Code examples for Chapter 11 -- Dictionaries"
-#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
-#  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
+#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.9.3\bin\julia.exe
+#  cd("E:\\aaa-Julia-course-2023\\lectures-1.9")
 #---
 
 function histogram(s)
@@ -60,7 +60,7 @@ function reverselookup(d, v)
             return k
         end
     end
-    error("LookupError - value v is not in the dictionary d")
+    error("LookupError - value $v is not in the dictionary $d")
 end
 
 h = histogram("parrot")
@@ -116,7 +116,7 @@ example2(); been_called
 
 #---
 
-const known = Dict(0 => 0, 1 => 1)
+known = Dict(0 => 0, 1 => 1)
 
 function example4()
     known[2] = 1
@@ -152,7 +152,7 @@ example6(); println(known3)
 
 function createDict()
     fileIn = open(
-        "E:\\aaa-Julia-course-2022\\lectures-1.8\\words.txt")
+        "E:\\aaa-Julia-course-2023\\lectures-1.9\\words.txt")
     wrdDct = Dict{String, Int}()
     M = 0; W = ""
     for word in eachline(fileIn)
@@ -207,7 +207,6 @@ for k = 1:length(intrloc_1)
 end
 
 #---
-
 # "Exercise 11-3"
 
 function invertdict(d::Dict)
@@ -224,12 +223,11 @@ d = Dict("a"=>1, "b"=>2, "c"=>3, 'e'=>3)
 invd = invertdict(d)
 
 #---
-
 # "Exercise 11-5"
 
 function createArray()
     fileIn = open(
-        "E:\\aaa-Julia-course-2022\\lectures\\words.txt")
+        "E:\\aaa-Julia-course-2023\\lectures\\words.txt")
     wrdDct = Array{String, 1}()
 
     for word in eachline(fileIn)
@@ -275,7 +273,6 @@ using BenchmarkTools
 
 
 #---
-
 # "Exercise 11-6"
 
 # from "Exercise 8-11"

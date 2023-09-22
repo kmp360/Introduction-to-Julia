@@ -291,7 +291,6 @@ hasduplicates([1 2 3])
 
 #---
 # "Exercise 10-8"
-
 using Unicode
 
 vector = ['🍌', '🍓', '🍐']
@@ -364,13 +363,13 @@ function linsearch(array, word)
 end
 
 function linsearch2(array, word)
-    return !(intersect(array, word) == [])
+    return !(intersect(array, [word]) == [])
 end
 
 array = createArray()
 #array = array[1:100]
 
-word = "aadvark"
+word = "aardvark"
 @time inbisect(array, word)
 @time linsearch(array, word)
 @time linsearch2(array, word)
@@ -379,14 +378,14 @@ word = "aadvark"
 # "Exercise 10-11"
 
 function reversepairs()
-    array = createArray()[1:10000]
-    #array = createArray()
+    #array = createArray()[1:10000]
+    array = createArray()
     pairarray = []
     for word in array
         reverseword = reverse(word)
         #if inbisect(array, reverseword)
-        #if linsearch(array, reverseword)
-        if linsearch2(array, reverseword)
+        if linsearch(array, reverseword)
+        #if linsearch2(array, reverseword)
             push!(pairarray, [word, reverseword])
         end
     end
