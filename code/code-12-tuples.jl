@@ -1,6 +1,6 @@
 # "Code examples for Chapter 12  -- Tuples"
-#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
-#  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
+#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.9.3\bin\julia.exe
+#  cd("E:\\aaa-Julia-course-2023\\lectures-1.9")
 #---
 
 a = 1;
@@ -127,7 +127,6 @@ str = "acb"
 nar = [3, 2, 1]
 
 m1 = sort(collect(zip(str, nar)), by = x -> x[1])
-
 N = length(m1)
 M1 = Array{Any,2}(undef,N,2)
 for r = 1:N, c = 1:2
@@ -152,7 +151,6 @@ d = Dict(t)
 d = Dict(zip("abc", 1:3))
 
 #---
-
 # "Exercise 12-1"
 
 function sumall_jose(arg...)
@@ -178,7 +176,7 @@ sum( (5, 7, 1) )
 # "Exercise 12-2"
 
 function lexiconDict()
-    fullpth = "E:\\aaa-Julia-course-2022\\lectures-1.8\\words.txt"
+    fullpth = "E:\\aaa-Julia-course-2023\\lectures-1.9\\words.txt"
     fileIn = open(fullpth)
 
     lexiconDict = Dict{String, Array{Char,1}}()
@@ -225,7 +223,7 @@ using Primes
 function slurp()
     """slurp in word list"""
     fhandle = open(
-        "E:\\aaa-Julia-course-2022\\lectures-1.8\\words.txt",
+        "E:\\aaa-Julia-course-2023\\lectures-1.9\\words.txt",
         "r",
     )
     words = String[]
