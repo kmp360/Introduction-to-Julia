@@ -6,37 +6,40 @@
 function histogram(s)
     d = Dict()
     for c in s
-        if !(c in keys(d))
-            d[c] = 1
-        else
+        if c in keys(d)
             d[c] += 1
+        else
+            d[c] = 1
         end
     end
     return d
 end
 
-str = "brontosaurus"
-histogram(str)
+begin
+    str = "brontosaurus"
+    histogram(str)
+end
 
 #---
-
 # "Exercise 11-1"
 
 function histogram2(s::String)::Dict{Char, Int64}
     d = Dict{Char, Int64}()
-    for c in s, d[c] = get(d, c, 0) + 1 end
+
+    for c in s d[c] = get(d, c, 0) + 1 end
+
     return d
 end
 
-str = "brontosaurus"
-h = histogram2(str)
+begin
+    str = "brontosaurus"
+    h = histogram2(str)
+end
 
 #---
 
 function printhist(h)
-    for c in keys(h)
-        println(c, " ", h[c])
-    end
+    for c in keys(h) println(c, " ", h[c]) end 
 end
 
 printhist(h)
@@ -51,6 +54,25 @@ end
 
 printhist2(h)
 
+#---
+
+function printv(h)
+    for v in sort(collect(values(h)))
+        println(v)
+    end
+end
+
+printv(h)
+
+#---
+
+function printhist(h)
+    for c in sort(collect(keys(h)))
+        println(h[c], " ", c)
+    end
+end
+
+printhist(h)
 
 #---
 
@@ -63,25 +85,25 @@ function reverselookup(d, v)
     error("LookupError - value $v is not in the dictionary $d")
 end
 
-h = histogram("parrot")
-reverselookup(h, 2)
+h = histogram("parrrroooot")
+reverselookup(h, 4)
 reverselookup(h, 3)
 
-findall(x -> x == 2, h)
+ind = findall(x -> sqrt(x) == 2, h)
 
 #---
 
 function invertdict(d)
-    inverse = Dict()
+    invD = Dict()
     for key in keys(d)
         val = d[key]
-        if val ∉ keys(inverse)
-            inverse[val] = [key]
+        if val in keys(invD)
+            push!(invD[val], key)
         else
-            push!(inverse[val], key)
+            invD[val] = [key]
         end
     end
-    inverse
+    invD
 end
 
 hist = histogram("brontosaurus")
@@ -90,6 +112,7 @@ inverse = invertdict(hist)
 #---
 
 known = Dict(0 => 0, 1 => 1)
+#known = Dict{BigInt, BigInt}(0 => 0, 1 => 1)
 
 function fibonacci(n)
     if n in keys(known)
@@ -100,53 +123,49 @@ function fibonacci(n)
     res
 end
 
-fibonacci(1000)
+fibonacci(1000)   # is the output correct? no, how could you check?
 fibonacci(10000)  # is negative, what happend?
+
 
 #---
 
 been_called = false
 
 function example2()
-    global been_called
-    been_called = true
+    global been_called = true
 end
 
-example2(); been_called
+example2(), been_called
 
 #---
 
-known = Dict(0 => 0, 1 => 1)
-
 function example4()
-    known[2] = 1
-    println("running example4")
+    known[2] = 3
 end
 
-#known = Dict(0 => 0, 1 => 1); 
-println(known)
-example4(); println(known)
+
+known4 = Dict(0 => 0, 1 => 1)
+example4(); known4
 
 #---
 
 function example5()
-    global known2 = Dict()
-    println("running example5")
+    global known5 = Dict()
 end
 
-known2 = Dict(0 => 0, 1 => 1); println(known2)
-example5(); println(known2)
+
+known5 = Dict(0 => 0, 1 => 1)
+example5(); known5
 
 #---
 
-const known3 = Dict(0 => 0, 1 => 1)
-println(known3)
+const known6 = Dict(0 => 0, 1 => 1)
 
 function example6()
-    known3[3] = 1
+    known6[3] = 1
 end
 
-example6(); println(known3)
+example6(); known6
 
 #---
 
@@ -196,9 +215,9 @@ using BenchmarkTools
 
 ==#
 
-@time int = interlock();
+@time intL = interlock();
 
-intrloc_1 = int[1];
+intrloc_1 = intL[1];
 for k = 1:length(intrloc_1)
     println(
         "$(intrloc_1[k][1]) + $(intrloc_1[k][2]) : $(intrloc_1[k][3])"
@@ -210,17 +229,17 @@ end
 # "Exercise 11-3"
 
 function invertdict(d::Dict)
-    inverse = Dict()
+    invD = Dict()
 
     for key in keys(d)
-        push!(get!(inverse, d[key], []), key)
+        push!(get!(invD, d[key], []), key)
     end
-    return inverse
+    return invD
 end
 
 d = Dict("a"=>1, "b"=>2, "c"=>3, 'e'=>3)
 
-invd = invertdict(d)
+invD = invertdict(d)
 
 #---
 # "Exercise 11-5"
@@ -239,7 +258,6 @@ function createArray()
 end
 
 wrdArray = createArray()
-
 
 
 function new_hasduplicates(array)
@@ -267,9 +285,9 @@ function hasduplicates(array)
 end
 
 using BenchmarkTools
-@btime new_hasduplicates(wrdArray)
-@btime new_hasduplicates2(wrdArray)
-@btime hasduplicates(wrdArray)
+@btime new_hasduplicates(wrdArray);
+@btime new_hasduplicates2(wrdArray);
+@btime hasduplicates(wrdArray);
 
 
 #---
