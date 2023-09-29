@@ -165,7 +165,10 @@ function example6()
     known6[3] = 1
 end
 
-example6(); known6
+example6();
+
+# known6 = Dict()       # this will not 
+                        # work because const
 
 #---
 
@@ -265,7 +268,7 @@ function new_hasduplicates(array)
     for k in array
         d[k] = get!(d, k, 0) + 1
     end
-    return Bool(1 in (values(d) .> 1))
+    return true in (values(d) .> 1)
 end
 
 function new_hasduplicates2(array)
@@ -285,7 +288,8 @@ function hasduplicates(array)
 end
 
 using BenchmarkTools
-@btime new_hasduplicates(wrdArray);
+
+@btime new_hasduplicates(wrdArray)
 @btime new_hasduplicates2(wrdArray);
 @btime hasduplicates(wrdArray);
 
