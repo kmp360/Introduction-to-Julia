@@ -1,10 +1,10 @@
 
 # "Code examples for Chapter 13 -- Data Structures"
-#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
-#  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
+#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.9.3\bin\julia.exe
+#  cd("E:\\aaa-Julia-course-2023\\lectures-1.9")
 #---
 
-alpha1 = ['a':'z', 'A':'Z']
+alpha1 = ['a':'z'; 'A':'Z']
 
 alpha2 = ['a':'z' 'A':'Z']
 
@@ -21,18 +21,17 @@ end
 #---
 
 
-println(isletter('B'))          # built in
-println(isletter("B"))
+isletter('B')       # built in
+isletter("B")
 
 function is_letter(chr::String)  # our version
     alphabet = string.( ['a':'z'; 'A':'Z'; '-'; ' '] )
     return chr in alphabet
 end
 
-println()
-println(is_letter("B"))
-
 #---
+
+using Downloads
 
 em2 = let
     url = "https://ia800303.us.archive.org/24/items/EmmaJaneAusten_753/emma_pdf_djvu.txt"

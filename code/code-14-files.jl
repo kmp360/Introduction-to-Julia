@@ -1,6 +1,10 @@
 # "Code example for Chapter 14 -- Files"
-#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
-#  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
+#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.9.3\bin\julia.exe
+#  cd("E:\\aaa-Julia-course-2023\\lectures-1.9")
+#---
+
+pwd()
+
 #---
 
 fout = open("output.txt", "w")
@@ -30,7 +34,7 @@ write(fout, string(150))
 
 camels = 42
 
-println(fout, "I have spotted $camels camels.")
+println(fout, "\nI have \tspotted $camels camels.")
 
 close(fout)
 
@@ -56,9 +60,9 @@ close(fout)
 
 using Printf
 
-fout = open("output.txt", "a")
+fout = open("output.txt", "w")
 
-@printf(fout, "Hello %s\n", "world")
+@printf(fout, "Hello %s\n", "world!")
 
 @printf(fout, "Scientific notation: %e\n", 1.234)
 
@@ -113,7 +117,7 @@ walk(pwd())
 
 #---
 
-path = "E:\\aaa-Julia-course-2022\\lectures-1.8\\Introduction-to-Julia\\notebooks"
+path = "E:\\aaa-Julia-course-2023\\lectures-1.9\\Introduction-to-Julia\\notebooks"
 
 for (root, dirs, files) in walkdir(path)
 
