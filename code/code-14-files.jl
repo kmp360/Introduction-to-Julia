@@ -10,7 +10,7 @@ pwd()
 fout = open("output.txt", "w")
 
 line = "This here's the wattle,\n"
-write(fout, line)
+nchar = write(fout, line)
 
 line = "the emblem of our land.\n"
 write(fout, line)
@@ -19,7 +19,7 @@ close(fout)
 
 #---
 
-fout = open("output.txt", "a")
+fout = open("output.txt", "w")
 
 line = "Add text here.\n"
 write(fout, line)
