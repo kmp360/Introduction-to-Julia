@@ -1,6 +1,6 @@
 # "Code example for Chapter 16 -- Structs and functions"
-#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
-#  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
+#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.9.3\bin\julia.exe
+#  cd("E:\\aaa-Julia-course-2023\\lectures-1.9")
 #---
 
 """
@@ -23,7 +23,7 @@ dump(time)
 
 using Printf
 
-@printf("%.0f %.1f %f", 0.5, 0.025, -0.0078125)
+@printf("%.0f %.1f %f", 0.5, 0.025, -0.0078125)     #just a reminder
 
 function printtime(time::MyTime)
 
@@ -32,14 +32,14 @@ end
 
 printtime(time)
 
-printtime(MyTime(1, 9, 0))
+printtime(MyTime(127, 9, 0))
 
 #---
 
 # Exercise 16-2
 
 function isafter(t1::MyTime, t2::MyTime)
-    (t1.hour, t1.minute, t1.minute) > (t2.hour, t2.minute, t2.second)
+    (t1.hour, t1.minute, t1.second) > (t2.hour, t2.minute, t2.second)
 end
 
 t1 = MyTime(1,1,0)
@@ -107,7 +107,7 @@ function timetoint(time)::Int64
     return time.second + time.minute * 60 + time.hour * 3600
 end
 
-function inttotime(seconds)::MyTime
+function inttotime(seconds::Number)::MyTime
     m, s = divrem(seconds, 60)
     h, m = divrem(m, 60)
     d, h = divrem(h, 24)
@@ -119,7 +119,7 @@ inttotime(seconds)
 
 function increment(time::MyTime, seconds::Int64)::MyTime
     s = seconds + timetoint(time)
-    return inttotime(seconds)
+    return inttotime(s)
 end
 
 function addtime3(t1::MyTime, t2::MyTime)::MyTime
@@ -146,11 +146,12 @@ function isvalidtime(time)
     if time.minute >= 60 || time.second >= 60
         return false
     end
-    true
+    return true
 end
 
 function addtime4(t1::MyTime, t2::MyTime)::MyTime
-    if !isvalidtime(t1) || !isvalidtime(t2)
+    if !isvalidtime(t1) || !isvalidtime(t2) 
+        # alternative: !( isvalidtime(t1) && !isvalidtime(t2) )
         error("invalid MyTime object")
     end
     seconds = timetoint(t1) + timetoint(t2)
@@ -171,6 +172,8 @@ function multime(t::MyTime, m::Number)::MyTime
     return inttotime(round(m*timetoint(t)))
 end
 
+mt = multime(MyTime(1, 33, 47), 0.1)
+
 function pace(t::MyTime, m::Number)
 
     try
@@ -182,6 +185,8 @@ function pace(t::MyTime, m::Number)
 end
 
 p = pace(MyTime(1, 33, 47), 10)
+
+typeof(p)
 
 println("Pace: $(p.minute) minutes and $(p.second) seconds per kilometer")
 
