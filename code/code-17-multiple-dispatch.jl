@@ -1,19 +1,28 @@
 # "Code example for Chapter 17 -- Multiple dispatch"
-#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.8.0\bin\julia.exe
-#  cd("E:\\aaa-Julia-course-2022\\lectures-1.8")
+#  C:\Users\kmpetersson\AppData\Local\Programs\Julia-1.9.3\bin\julia.exe
+#  cd("E:\\aaa-Julia-course-2023\\lectures-1.9")
 #---
 
 (1 + 2) :: Int64
 
 #(1 + 2) :: Float64
 
+#---
+
 x::Float64 = 100
 x
+
 typeof(x)
-x = "str"
+
+#x = "str"
+
+#---
+
 x = 3
 x
 typeof(x)
+
+#---
 
 function returnfloat()
     x::Float64 = 100
@@ -23,6 +32,7 @@ end
 y = returnfloat()
 typeof(y)
 
+#---
 
 function sinc(x::Number)::Float64
     if x == 0
@@ -44,26 +54,28 @@ struct MyTime
 end
 
 #==
-Default constructors
+Default constructors associated with MyTime
 MyTime(hour, minute, second)
 MyTime(hour::Int64, minute::Int64, second::Int64)
 ==#
-
 
 #---
 
 using Printf
 
-@printf("%.0f %.1f %f", 0.5, 0.025, -0.0078125)
+@printf("%.0f %.1f %f\n", 0.5, 0.025, -0.0078125)
 
 function printtime(time::MyTime)
 
-    @printf("%02d:%02d:%02d", time.hour, time.minute, time.second)
+    @printf("%02d:%02d:%02d\n", time.hour, time.minute, time.second)
 end
 
-printtime(time)
-
 printtime(MyTime(1, 9, 0))
+
+
+mtime = MyTime(35, 69, 0)
+
+printtime(mtime)
 
 #---
 
@@ -114,33 +126,35 @@ printtime(done)
 
 #---
 
-typeof(2//3)
+typeof(2//3)    # Rational number type
 
 #---
 
-function f(c; a = 1, b = 2)    # short-form function definition with defaults
+function f(c; a = 1, b = 2) # short-form function definition with named defaults
     a + 2b + c
 end
 
 f(1)
 
-f(1, b = 2)
+f(1, b = 3)
 
-f(1, b = 2, a = 3)
+f(1, a = 3)
 
 #---
 
 hour = 16
 minute = 17
-second = 19
+second = 19.0
 
 MyTime(hour, minute, second)
-MyTime(hour::Int64, minute::Int64, second::Int64)
+# MyTime(hour::Int64, minute::Int64, second::Int64)
 
 # outer copy constructor
 function MyTime(time::MyTime)
     MyTime(time.hour, time.minute, time.second)
 end
+
+#---
 
 # inner constructor
 struct MyTime2
@@ -149,12 +163,16 @@ struct MyTime2
     second  :: Int64
 
     function MyTime2(hour = 0, minute = 0, second = 0)
-       new(hour, minute, second)
+        if hour == 24 hour = 0 end
+        new(hour, minute, second)
     end
     
     function MyTime2(hour::Int64 = 0, minute::Int64 = 0, second::Int64 = 0)
+        @assert(0 ≤ hour ≤ 24, "Minute is not between 0 and 60.")
         @assert(0 ≤ minute < 60, "Minute is not between 0 and 60.")
         @assert(0 ≤ second < 60, "Second is not between 0 and 60.")
+
+        if hour == 24 hour = 0 end
 
         new(hour, minute, second)
     end
@@ -177,7 +195,16 @@ MyTime2(hour::Int64)
 MyTime2(hour::Int64, minute::Int64)
 MyTime2(hour::Int64, minute::Int64, second::Int64)
 
-time = MyTime2(hour, minute, second)
+
+hour = 24.0
+MyTime2(hour, minute, second)
+
+#==
+hour = 25
+MyTime2(hour::Int64, minute::Int64, second::Int64)
+==#
+
+mtime = MyTime2(hour, minute, second)
 
 #---
 
@@ -187,6 +214,7 @@ mutable struct MyTime3
     second  :: Int
 
     function MyTime3(hour::Int64 = 0, minute::Int64 = 0, second::Int64 = 0)
+        @assert(0 ≤ hour ≤ 24, "Minute is not between 0 and 60.")
         @assert(0 ≤ minute < 60, "Minute is between 0 and 60.")
         @assert(0 ≤ second < 60, "Second is between 0 and 60.")
 
@@ -207,14 +235,14 @@ function Base.show(io::IO, time::MyTime2)
 end
 
 fout = open("output.txt", "w")
-time = MyTime2(9, 30, 5)
-show(fout, time)
+mtime = MyTime2(9, 30, 5)
+show(fout, mtime)
 
 close(fout)
 
 #---
 
-show(time)
+show(mtime)
 
 #---
 
