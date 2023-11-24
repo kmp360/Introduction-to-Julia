@@ -278,4 +278,48 @@ y = square("spam")
 a = [1, missing]
 sum(a)
 
-sum(skipmissing(a))
+
+# Regex
+
+function usesonly(word, available)
+    @show r = Regex("[^$(available)]")
+    !occursin(r, word)
+end
+
+usesonly("banana", "abn")
+
+usesonly("bananas", "abn")
+
+m = match(r"[^abn]", "banana")
+
+typeof(m)
+
+m = match(r"[^abn]", "bananas")
+
+m.match
+
+m.captures
+
+m.offset
+
+dump(m)
+
+# Multi-dimensional arrays
+
+s = ones(String, 2, 3)
+
+#---
+
+function squaresum(a::Float64, b::Float64)
+    a^2 + b^2
+end
+
+using InteractiveUtils
+
+@code_lowered squaresum(3.0, 4.0)
+
+@code_typed squaresum(3.0, 4.0)
+
+@code_llvm squaresum(3.0, 4.0)
+
+@code_native squaresum(3.0, 4.0)
